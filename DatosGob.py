@@ -1,6 +1,6 @@
 import pandas as pd
 path=input('¿Qué año desea consultar de 1985 a 2018: ');
-datos= pd.read_csv( path + 'Precipo.csv',header=1)
+datos= pd.read_csv( path + 'Precipo.csv',header=1,encoding="latin-1")
 #print(datos)
 #[renglones:columnas]
 Entidades=datos.iloc[0:32,0:13]
