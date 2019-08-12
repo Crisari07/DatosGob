@@ -4,7 +4,13 @@ global Entidad
 global Mes
 
 
-path=input('¿Qué año desea consultar de 1985 a 2018: ');
+path=int(input('¿Qué año desea consultar de 1985 a 2018: '));
+if path<1985 or path>2018:
+    print('Por favor digite el año como se indico')
+    while(path<1985 or path>2018):
+        path=int(input('¿Qué año desea consultar de 1985 a 2018: '));
+
+path=str(path)
 datos= pd.read_csv( path + 'Precip.csv',header=1, encoding="latin-1")
 Entidades=datos.iloc[0:32,0:13]
 print(Entidades)
