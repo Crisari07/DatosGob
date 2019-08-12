@@ -2,13 +2,15 @@ import pandas as pd
 import tkinter as tk
 global Entidad
 global Mes
+
+
 path=input('¿Qué año desea consultar de 1985 a 2018: ');
 datos= pd.read_csv( path + 'Precip.csv',header=1, encoding="latin-1")
 Entidades=datos.iloc[0:32,0:13]
 print(Entidades)
 
-def hola():
-    
+def precip():
+   
     if Entidad2.get() == 'AGUASCALIENTES':
         Entidad=0
     elif Entidad2.get() == 'BAJA CALIFORNIA':
@@ -99,48 +101,56 @@ def hola():
         Mes=11
     elif Mes2.get() == 'Diciembre':
         Mes=12
-    print(Mes)
+
+        
+
+    PrecipMes.set(str(Entidades.iloc[Entidad][Mes]))
+
+        
+    
+    
 
     if Mes==1:
-        print("Precipitacion de Enero: "+str(Entidades.iloc[Entidad][Mes]))
+        print("Precipitacion de Enero: "+(PrecipMes.get()))
     elif Mes==2:
-        print("Precipitacion de Febrero: "+str(Entidades.iloc[Entidad][Mes]))
+        print("Precipitacion de Febrero: "+(PrecipMes.get()))
     elif Mes==3:
-        print("Precipitacion de Marzo: "+str(Entidades.iloc[Entidad][Mes]))
+        print("Precipitacion de Marzo: "+(PrecipMes.get()))
     elif Mes==4:
-        print("Precipitacion de Abril: "+str(Entidades.iloc[Entidad][Mes]))
+        print("Precipitacion de Abril: "+(PrecipMes.get()))
     elif Mes==5:
-        print("Precipitacion de Mayo: "+str(Entidades.iloc[Entidad][Mes]))
+        print("Precipitacion de Mayo: "+(PrecipMes.get()))
     elif Mes==6:
-        print("Precipitacion de Junio: "+str(Entidades.iloc[Entidad][Mes]))
+        print("Precipitacion de Junio: "+(PrecipMes.get()))
     elif Mes==7:
-        print("Precipitacion de Julio: "+str(Entidades.iloc[Entidad][Mes]))
+        print("Precipitacion de Julio: "+(PrecipMes.get()))
     elif Mes==8:
-        print("Precipitacion de Agosto: "+str(Entidades.iloc[Entidad][Mes]))
+        print("Precipitacion de Agosto: "+(PrecipMes.get()))
     elif Mes==9:
-        print("Precipitacion de Septiembre: "+str(Entidades.iloc[Entidad][Mes]))
+        print("Precipitacion de Septiembre: "+(PrecipMes.get()))
     elif Mes==10:
-        print("Precipitacion de Octubre: "+str(Entidades.iloc[Entidad][Mes]))
+        print("Precipitacion de Octubre: "+(PrecipMes.get()))
     elif Mes==11:
-        print("Precipitacion de Noviembre: "+str(Entidades.iloc[Entidad][Mes]))
+        print("Precipitacion de Noviembre: "+(PrecipMes.get()))
     elif Mes==12:
-        print("Precipitacion de Diciembre: "+str(Entidades.iloc[Entidad][Mes])) 
-        
-        
+        print("Precipitacion de Diciembre: "+(PrecipMes.get()))
+
+    return PrecipMes.get()
+    
 
 def cerrar():
+
     ventana.destroy()
 ventana=tk.Tk()
 ventana.title("Precipitaciones en las entidades")
 ventana.geometry('500x500+600+100')
 ventana.configure(background='white')
 
-#datos= pd.read_csv( path + 'Precip.csv',header=1, encoding="latin-1")
-#print(datos)
+
+
+PrecipMes=tk.StringVar()
+print(PrecipMes.get())
 #[renglones:columnas]
-
-
-
 
 
 
@@ -167,11 +177,18 @@ opcion2.pack(padx=5,pady=5,fill=tk.X)
 
 #color=tk.Label(ventana,bg='green2',textvariable=Entidad, padx=5,pady=5,width=120)
 #color.pack()
-lbPrecipitacion=tk.Label(ventana,textvariable=Mes2,padx=5,pady=5,width=120000)
-lbPrecipitacion.pack(fill=tk.X)
-
-botonDatos=tk.Button(ventana,text="Dar Datos",fg='blue',command=hola)
+botonDatos=tk.Button(ventana,text="Dar Datos",fg='blue',command=precip)
 botonDatos.pack(side=tk.TOP)
+
+e3=tk.Label(ventana,text="Precitacion: ",bg="gray1",fg="white")
+e3.pack(padx=5,pady=5,ipadx=5,ipady=5,fill=tk.X)
+
+precip=tk.Label(ventana,bg='green2',textvariable=PrecipMes, padx=5,pady=5,width=120)
+precip.pack()
+
+
+botonCerrar=tk.Button(ventana,text="Cerrar",fg='blue',command=cerrar)
+botonCerrar.pack(side=tk.TOP)
 
 ventana.mainloop()
 
