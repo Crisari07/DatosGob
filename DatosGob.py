@@ -1,19 +1,7 @@
 import pandas as pd
 import tkinter as tk
-global Entidad
+Entidad = '0'
 global Mes
-
-
-path=int(input('¿Qué año desea consultar de 1985 a 2018: '));
-if path<1985 or path>2018:
-    print('Por favor digite el año como se indico')
-    while(path<1985 or path>2018):
-        path=int(input('¿Qué año desea consultar de 1985 a 2018: '));
-
-path=str(path)
-datos= pd.read_csv( path + 'Precip.csv',header=1, encoding="latin-1")
-Entidades=datos.iloc[0:32,0:13]
-print(Entidades)
 
 def precip():
    
@@ -111,7 +99,7 @@ def precip():
         
 
     PrecipMes.set(str(Entidades.iloc[Entidad][Mes]))
-
+    PrecipAnual.set(str(Entidades.iloc[Entidad][13]))
         
     
     
@@ -140,6 +128,8 @@ def precip():
         print("Precipitacion de Noviembre: "+(PrecipMes.get()))
     elif Mes==12:
         print("Precipitacion de Diciembre: "+(PrecipMes.get()))
+    e3['text'] = "Precipitacion de "+Entidad2.get().lower()+" en el mes de "+ Mes2.get()+" :"
+    e4['text'] = "Precipitacion anual de "+Entidad2.get().lower()+": "
 
     return PrecipMes.get()
     
@@ -154,8 +144,18 @@ ventana.configure(background='white')
 
 
 
+path=int(input('¿Qué año desea consultar de 1985 a 2018: '));
+if path<1985 or path>2018:
+    print('Por favor digite el año como se indico')
+    while(path<1985 or path>2018):
+        path=int(input('¿Qué año desea consultar de 1985 a 2018: '));
+
+path=str(path)
+datos= pd.read_csv( path + 'Precip.csv',header=1, encoding="latin-1")
+Entidades=datos.iloc[0:33,0:14]
+print(Entidades)
 PrecipMes=tk.StringVar()
-print(PrecipMes.get())
+PrecipAnual=tk.StringVar()
 #[renglones:columnas]
 
 
@@ -186,11 +186,21 @@ opcion2.pack(padx=5,pady=5,fill=tk.X)
 botonDatos=tk.Button(ventana,text="Dar Datos",fg='blue',command=precip)
 botonDatos.pack(side=tk.TOP)
 
-e3=tk.Label(ventana,text="Precitacion: ",bg="gray1",fg="white")
+e3=tk.Label(ventana,text="Precitacion mensual: ",bg="gray1",fg="white")
 e3.pack(padx=5,pady=5,ipadx=5,ipady=5,fill=tk.X)
+
 
 precip=tk.Label(ventana,bg='green2',textvariable=PrecipMes, padx=5,pady=5,width=120)
 precip.pack()
+
+e4=tk.Label(ventana,text="Precitacion anual: ",bg="gray1",fg="white")
+e4.pack(padx=5,pady=5,ipadx=5,ipady=5,fill=tk.X)
+
+precipAnual=tk.Label(ventana,bg='green2',textvariable=PrecipAnual, padx=5,pady=5,width=120)
+precipAnual.pack()
+
+
+
 
 
 botonCerrar=tk.Button(ventana,text="Cerrar",fg='blue',command=cerrar)
