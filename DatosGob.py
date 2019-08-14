@@ -4,6 +4,12 @@ Entidad = '0'
 global Mes
 
 def precip():
+
+    path=(Año.get())
+
+    datos= pd.read_csv( path + 'Precip.csv',header=1, encoding="latin-1")
+    Entidades=datos.iloc[0:33,0:14]
+    print(Entidades)
    
     if Entidad2.get() == 'AGUASCALIENTES':
         Entidad=0
@@ -97,11 +103,10 @@ def precip():
         Mes=12
 
         
-
+    
     PrecipMes.set(str(Entidades.iloc[Entidad][Mes]))
     PrecipAnual.set(str(Entidades.iloc[Entidad][13]))
-        
-    
+       
     
 
     if Mes==1:
@@ -143,17 +148,16 @@ ventana.geometry('500x500+600+100')
 ventana.configure(background='white')
 
 
+e5=tk.Label(ventana,text="Seleccione un año: ",bg="gray1",fg="white")
+e5.pack(padx=5,pady=5,ipadx=5,ipady=5,fill=tk.X)
 
-path=int(input('¿Qué año desea consultar de 1985 a 2018: '));
-if path<1985 or path>2018:
-    print('Por favor digite el año como se indico')
-    while(path<1985 or path>2018):
-        path=int(input('¿Qué año desea consultar de 1985 a 2018: '));
+Año=tk.StringVar(ventana)
+Año.set('1985')
+opciones3=['1985','1986','1987','1988','1989','1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018']
+opcion3=tk.OptionMenu(ventana,Año,*opciones3)
+opcion3.pack(padx=5,pady=5,fill=tk.X)
 
-path=str(path)
-datos= pd.read_csv( path + 'Precip.csv',header=1, encoding="latin-1")
-Entidades=datos.iloc[0:33,0:14]
-print(Entidades)
+
 PrecipMes=tk.StringVar()
 PrecipAnual=tk.StringVar()
 #[renglones:columnas]
