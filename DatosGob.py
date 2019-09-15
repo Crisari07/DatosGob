@@ -160,6 +160,7 @@ opcion3.pack(padx=5,pady=5,fill=tk.X)
 
 PrecipMes=tk.StringVar()
 PrecipAnual=tk.StringVar()
+
 #[renglones:columnas]
 
 
